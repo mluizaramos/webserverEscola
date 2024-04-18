@@ -1,0 +1,202 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}"> -->
+
+    <title>Programação Web Back End</title>
+    <style>
+        *{
+        margin: 0;
+        padding: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        
+        }
+
+        body{
+            background-color: rgb(17, 16, 16);
+        }
+
+        .fundo_menu{
+            display: inline-block;
+            width: 100%;
+            height: 90px;
+            column-count:3;
+            position: relative;
+            padding: 30px 500px 0px 20px;
+            background-color: #750c0c;
+            justify-content: center;
+        }
+
+        .logo_senai img{
+            margin-left: 20px;
+            width: 180px;
+        }
+
+        .btn{
+            width: 100px;
+            height: 35px;
+            margin-left: 400px;
+            border: solid 1px transparent;
+            font-size: 15px;
+            font-weight: bold;
+            background-color:  floralwhite;
+            color: rgb(17, 16, 16);
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .btn:hover{
+            background-color: rgb(17, 16, 16);
+            color: rgb(255, 255, 255);
+        }
+
+        .nome_sistema{
+            justify-content: center;
+            text-align: center;
+            color: aliceblue;
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .menu{
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.99);
+        }
+        .menu ul {
+            list-style-type: none;
+            padding: 0;
+            background-color: rgb(141, 32, 32);
+            font-size: 17px;
+        }
+
+        .menu ul li {
+            display:inline;
+            position: relative;
+        }
+        
+        .menu ul li a {
+            text-decoration: none;
+            display:inline-block;
+            padding: 15px 40px 15px 40px;
+            transition: background .3s;
+            color: aliceblue;
+        }
+
+        .menu ul li a:hover {
+            background-color: #750c0c;
+            color: #e7e7e7;
+            font-weight: bold;
+            box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.20);
+        }
+
+        .menu ul ul {
+            display: none;
+            position: absolute;
+        }
+
+        .menu ul li:hover ul {
+            display: block;
+        }
+
+        .menu ul ul {
+            width: 150px;
+        }
+
+        .menu ul ul li a {
+            display: block;
+        }
+        .user-log li{
+            color: #e7e7e7;
+            margin-right: 400px;
+        }
+        .section_titulo h2 {
+            text-align: center;
+            color: aliceblue;
+            margin-top: 60px;
+            font-weight: 300;
+        }
+    </style>
+</head>
+<body >
+
+<header class="login">
+    <div class="fundo_menu">
+        <div class="logo_senai">
+            <a href="index.html"><img src="{% static 'imagens/logo-senai-w.png' %}" /></a>
+        </div>
+        <div class="nome_sistema">
+             Sistema de Apoio aos Professores
+        </div>
+
+        {% if user.is_authenticated %}
+        <div class="botao_login">
+            <a href="accounts/logout"><button class="btn btn_login">Logout</button></a>
+        </div>
+        {% else %}
+        <div class="botao_login">
+            <a href="accounts/login"><button class="btn btn_login">Login</button></a>
+        </div>
+        {% endif %}
+
+    </div>
+</header> 
+<header class="menu_principal">
+    
+</header>   
+
+<nav class="menu">
+    <ul>
+
+        <li><a href="">Cadastros</a>
+            <ul>
+                <li><a href="{% url 'cad_turmas' %}">Turmas</a></li>
+                <li><a href="">Atividades</a></li>
+            </ul>
+        </li>   
+        <li><a href="">Consultar</a>
+            <ul>
+                <li><a href="{% url 'ver_turmas' %}">Turmas</a></li>
+                <li><a href="Cons_Atendente.html">Atividades</a></li>
+            </ul>
+        </li>
+        <li><a href="">Registrar Turmas do Professor</a></li>
+        <li><a href="">Registrar Atividades da Turma</a></li>
+        <li style="color: aliceblue;margin-left: 760px;"> Usuário logado: {{usuario_logado}}</li>
+
+    </ul> 
+</nav>      
+
+<section>
+    <div class="section_titulo">
+        <h2>Seja bem-vindo professor {{usuario_logado}}!</h2>
+    </div>
+    <h1>Bem-vindo à Página Inicial</h1>
+
+    {% if usuario_logado %}
+        <p>Olá, {{ usuario_logado }}! Bem-vindo de volta.</p>
+        <!-- Adicione aqui qualquer outra informação que deseja exibir para o usuário logado -->
+    {% else %}
+        <p>Por favor, faça login para acessar o conteúdo.</p>
+        <!-- Adicione aqui o formulário de login ou qualquer outro conteúdo para os visitantes não logados -->
+    {% endif %}
+
+    <!-- Adicione aqui links para outras páginas do seu aplicativo -->
+    <a href="{% url 'ver_turmas' %}">Ver Turmas</a>
+    <a href="{% url 'cad_turmas' %}">Cad Turmas</a>
+</section>
+<!-- <footer class="rodape">
+    <div class="fundo_menu">
+        
+        <div class="rodape1">
+            Escola e Faculdade de Tecnologia Senai "Roberto Mange"<br>
+            Curso de Análise e Desenvolvimento de Sistemas.<br>
+         
+        </div>  
+        
+        
+    </div>
+</footer>  -->
+</body>
+
+</html>
